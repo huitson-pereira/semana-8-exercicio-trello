@@ -1,11 +1,14 @@
-const { createOneTrainee } = require('../controllers/trainee.controller');
+const { createOneTrainee, listAllTrainee, listOneTrainee, atualizaOneTrainee } = require('../controllers/trainee.controller');
 const { Router } = require('express')
 
 class TraineeRouter {
   routesFromTrainee () {
     const traineeRoutes = Router()
     traineeRoutes.post('/createOneTrainee', createOneTrainee)
-    return traineeRoutes
+    traineeRoutes.get('/listAllTrainee', listAllTrainee)
+    traineeRoutes.get('/listOneTrainee/:id', listOneTrainee)
+    traineeRoutes.put('/atualizaOneTrainee/:id', atualizaOneTrainee)
+     return traineeRoutes
   }
 }
 

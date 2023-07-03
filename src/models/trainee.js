@@ -40,7 +40,7 @@ const Trainee = connection.define("trainee", {
   createdAt: DATE,
   updatedAt: DATE
 },
-  { underscored: true });
+  { underscored: true, paranoid: true });
 
 
   module.exports = { Trainee }
