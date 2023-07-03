@@ -1,11 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 const connection = require("./database/connection");
+const routes = require('./routes')
 
 class Server {
     constuctor(server = express()){
         this.midlewares(server);
-        this.database();
+        this.database();        
+        this.routes(server)
         this.initializeServer(server)       
     }
 
@@ -21,6 +23,10 @@ class Server {
         } catch(error){
             console.error("Não foi possível conectar no banco de dados.", error);
         }
+    }
+
+    async routes(app) {
+        app.use(routes) 
     }
 
     async initializeServer(app){
