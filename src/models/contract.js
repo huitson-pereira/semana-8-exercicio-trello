@@ -45,7 +45,8 @@ const Contract = connection.define("contract", {
     createdAt: DATE,
     
     updatedAt: DATE,
-}, 
+},
+ 
 { underscored: true, paranoid: true })
 
 Contract.belongsTo(Trainee)

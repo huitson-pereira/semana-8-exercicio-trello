@@ -29,7 +29,18 @@ class CategoryController {
     
         return response.status(200).send({records: data, total})
     }
-    
+
+    async updateOneCategory(request, response) {
+        const { id } = request.params
+        const { name } = request.body
+        await Category.update({ name }, { where: { id } })
+        return response.status(204).send()
+      }
+      async deleteOneCategory(request, response) {
+        const { id } = request.params
+        await Category.destroy({where: { id }})
+        return response.status(204).send()
+      }
 }
 
 
