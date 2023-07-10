@@ -2,7 +2,7 @@ const { DATE, INTEGER, DATEONLY, BOOLEAN, FLOAT } = require('sequelize');
 const { connection } = require('../database/connection');
 const { Trainee } = require('./trainee');
 const { Category } = require('./category');
-const { Company } = require('./company');
+const { Companie } = require('./companie');
 
 const Contract = connection.define("contract", {
     traineeId: {
@@ -24,7 +24,7 @@ const Contract = connection.define("contract", {
     companyId: {
         type: INTEGER,
         references: {
-            model: Company,
+            model: Companie,
             key: 'id'
         }
     },
@@ -51,6 +51,6 @@ const Contract = connection.define("contract", {
 
 Contract.belongsTo(Trainee)
 Contract.belongsTo(Category)
-Contract.belongsTo(Company)
+Contract.belongsTo(Companie)
 
 module.exports = { Contract }

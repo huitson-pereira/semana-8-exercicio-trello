@@ -3,7 +3,7 @@ const { STRING, DATE, BOOLEAN } = require('sequelize');
 
 const Companie = connection.define("companie", {
     cnpj: STRING,
-    company_name: STRING,
+    companyName: STRING,
     contact: STRING,
     cep: STRING,
     address: STRING,
@@ -12,11 +12,11 @@ const Companie = connection.define("companie", {
     state: STRING,
     number: STRING,
     complement: STRING,
-    rh_analyst_name: STRING,
-    supervisor_name: STRING,
-    created_at: DATE,
-    updated_at: DATE,
-    deleted_at: DATE,
+    rhAnalystName: STRING,
+    supervisorName: STRING,
+    createdAt: DATE,
+    updatedAt: DATE,
+    deletedAt: DATE,
 },
 
 { underscored: true, paranoid: true });
