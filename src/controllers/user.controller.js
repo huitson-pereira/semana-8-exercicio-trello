@@ -1,5 +1,4 @@
 const { User  } = require('../models/user')
-const { sign } = require('jsonwebtoken')
 const { config } = require('dotenv');
 const { Role } = require('../models/role');
 const { Permission } = require('../models/permission');

@@ -8,7 +8,7 @@ class CompanieRouter {
     companieRoutes.get('/listAllCompanie', listAllCompanie)
     companieRoutes.get('/listOneCompanie/:id', listOneCompanie)
     
-    return traineeRoutes
+    return companieRoutes
   }
 }
 
