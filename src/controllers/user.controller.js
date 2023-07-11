@@ -1,7 +1,6 @@
 const { User  } = require('../models/user')
+const { sign } = require('jsonwebtoken')
 const { config } = require('dotenv');
-const { Role } = require('../models/role');
-const { Permission } = require('../models/permission');
 config()
 
 class UserController{
@@ -47,7 +46,10 @@ class UserController{
             })
     
             if (user.password === password){
-                return response.status(200).send({user}) 
+                const payload = {'email': user.email}
+                const token = sign(payload, process.env.SECRET_JWT)
+                
+                return response.status(200).send({token}) 
             }
             else {
                 return response.status(400).send({"msg": "Senha Invalida"})

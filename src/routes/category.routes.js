@@ -1,11 +1,12 @@
 const { Router } = require('express')
-const { createOneCategory, listAllCategories, updateOneCategory, deleteOneCategory } = require('../controllers/category.controller')
+const { createOneCategory, listAllCategory, updateOneCategory, deleteOneCategory, listOneCategory } = require('../controllers/category.controller')
 
 class CategoryRoutes {
   routesFromCategory () {
     const categoryRoutes = Router();
     categoryRoutes.post('/createOneCategory', createOneCategory);
-    categoryRoutes.get('/listAllCategories', listAllCategories);
+    categoryRoutes.get('/listAllCategory', listAllCategory);
+    categoryRoutes.get('/listOneCategory/:id', listOneCategory)
     categoryRoutes.patch('/updateOneCategory/:id', updateOneCategory);
     categoryRoutes.delete('/deleteOneCategory/:id', deleteOneCategory);
     

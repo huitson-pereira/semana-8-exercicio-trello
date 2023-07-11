@@ -1,5 +1,7 @@
 const { Category } = require('../models/category')
-
+const { verify } = require('jsonwebtoken')
+const {config} = require('dotenv')
+config()
 class CategoryController {
     async createOneCategory(request, response) {
 
@@ -20,14 +22,30 @@ class CategoryController {
         }
     }
     
-    async listAllCategories (request, response) {
+    async listAllCategory (request, response) {
         const {offset, limit} = request.params
     
-        const data = await listCategoriesService(offset, limit)
+        //const data = await listCategoriesService(offset, limit)
     
         const total = await Category.count()
     
         return response.status(200).send({records: data, total})
+    }
+
+    async listOneCategory(request, response) {
+      const { authorization } = request.headers
+      try {
+        verify(authorization, process.env.SECRET_JWT)
+        console.log('Token verificado com sucesso!')
+
+        const { id } = request.params
+        const data = await Category.findByPk(id)
+  
+        return response.status(200).send(data)
+      }catch(error) {
+        console.log('Token invalido')
+      }
+      
     }
 
     async updateOneCategory(request, response) {
