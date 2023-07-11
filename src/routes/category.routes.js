@@ -1,18 +1,20 @@
+const { createOneCategory, listAllCategory, listOneCategory, updateOneCategory, deleteOneCategory } = require('../controllers/category.controller');
 const { Router } = require('express')
-const { createOneCategory, listAllCategory, updateOneCategory, deleteOneCategory, listOneCategory } = require('../controllers/category.controller')
+const { auth } = require('../middleware/auth')
+//const { loggin } = require('../middleware/loggin');
+const { hasPermission } = require('../middleware/hasPermission');
 
-class CategoryRoutes {
+class CategoryRouter {
   routesFromCategory () {
-    const categoryRoutes = Router();
-    categoryRoutes.post('/createOneCategory', createOneCategory);
-    categoryRoutes.get('/listAllCategory', listAllCategory);
-    categoryRoutes.get('/listOneCategory/:id', listOneCategory)
-    categoryRoutes.patch('/updateOneCategory/:id', updateOneCategory);
-    categoryRoutes.delete('/deleteOneCategory/:id', deleteOneCategory);
-    
+    const categoryRoutes = Router()
+    categoryRoutes.post('/createOneCategory', createOneCategory)
+    categoryRoutes.get('/listCategory/:offset/:limit', listAllCategory)
+    categoryRoutes.get('/listOneCategory/:id', auth, hasPermission(['sListarCategorias','Falso']), listOneCategory)
+    categoryRoutes.patch('/updateOneCategory/:id', updateOneCategory)
+    categoryRoutes.delete('/deleteOneCategory/:id', deleteOneCategory)
+
     return categoryRoutes
   }
 }
 
-
-module.exports = new CategoryRoutes()
+module.exports = new CategoryRouter()

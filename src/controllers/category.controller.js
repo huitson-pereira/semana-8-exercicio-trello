@@ -25,7 +25,7 @@ class CategoryController {
     async listAllCategory (request, response) {
         const {offset, limit} = request.params
     
-        //const data = await listCategoriesService(offset, limit)
+        const data = await listCategoriesService(offset, limit)
     
         const total = await Category.count()
     

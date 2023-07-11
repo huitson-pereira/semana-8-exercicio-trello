@@ -1,6 +1,8 @@
 const { User  } = require('../models/user')
 const { sign } = require('jsonwebtoken')
 const { config } = require('dotenv');
+const { Role } = require('../models/role');
+const { Permission } = require('../models/permission');
 config()
 
 class UserController{
@@ -41,17 +43,23 @@ class UserController{
                 password
             } = request.body;
     
+            console.log(request.body)
+            
             const user = await User.findOne({
                 where:{email:email},
+                include: [{ model: Role, as: 'roles', through: { attributes: [] }, 
+                    include:[{ model: Permission, as: 'permissions', through: { attributes: [] }}]
+                }],
             })
     
             if (user.password === password){
-                const payload = {'email': user.email}
+                const payload = {"email": user.email, "roles":user.roles}
+
                 const token = sign(payload, process.env.SECRET_JWT)
-                
                 return response.status(200).send({token}) 
             }
             else {
+                console.log("Senha Diferente")
                 return response.status(400).send({"msg": "Senha Invalida"})
             }
         } catch (error) {
